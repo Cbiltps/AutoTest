@@ -9,10 +9,5 @@ public class RunAutoTest {
     public static void main(String[] args) throws InterruptedException {
         /*FirstAutoTest test = new FirstAutoTest();
         test.baiduAutoTest();*/
-
-        AutoTest test = new AutoTest();
-        test.startDriver();
-        test.positioning();
-        test.closeDriver();
     }
 }
