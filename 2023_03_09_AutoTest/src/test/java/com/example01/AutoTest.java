@@ -1,3 +1,5 @@
+package com.example01;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,16 +20,6 @@ public class AutoTest {
     private FirefoxDriver driver = new FirefoxDriver();
     public void startDriver() throws InterruptedException {
         driver.get("https://www.baidu.com");
-//        driver.get("http://news.baidu.com/");
-//        driver.get("https://tool.lu/");
-//        driver.get("file:///D:/selenium4html/selenium4html/modal.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/alert.html#");
-//        driver.get("file:///D:/selenium4html/selenium4html/confirm.html");
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        driver.get("file:///D:/selenium4html/selenium4html/Prompt.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/level_locate.html#");
-//        driver.get("file:///D:/selenium4html/selenium4html/select.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/upload.html");
 
 //        Thread.sleep(2000);
     }
