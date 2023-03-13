@@ -3,6 +3,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 /**
@@ -140,6 +141,35 @@ public class AutoTest {
     }
 
     /**
+     * 同时使用隐式等待和显示等待, 隐式等待为3秒, 显示等待为10秒, 最终执行时间是多少?
+     *     打印出来的时间是10秒左右!
+     *
+     * 所以, 执行结果并不会想预期的那样, 不建议同时使用!
+     */
+    public void testImplicitAndDisplayWait() {
+        // 设置时间格式
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 打印时间戳
+        System.out.println(dateFormat.format(System.currentTimeMillis()));
+        // 隐式等待
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        // 输入
+        driver.findElement(By.cssSelector("#kw")).sendKeys("鞠婧祎");
+        // 点击
+        driver.findElement(By.cssSelector("#su")).click();
+        // 显示等待
+        WebDriverWait o = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            o.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".paragraph_Hq6qX > span:nth-child(1) > s" +
+                    "pan:nth-child(10)")));
+        } catch (Exception e) {
+            // 没有找到抛出TimeoutException异常
+            System.out.println("TimeoutException");
+        }
+        System.out.println(dateFormat.format(System.currentTimeMillis()));
+    }
+
+    /**
      * 释放驱动对象并关闭浏览器
      * @throws InterruptedException
      */
@@ -155,7 +185,8 @@ public class AutoTest {
         test.startDriver();
 //        test.positioning();
 //        test.operate();
-        test.testWait();
+//        test.testWait();
+        test.testImplicitAndDisplayWait();
         test.closeDriver();
     }
 }
