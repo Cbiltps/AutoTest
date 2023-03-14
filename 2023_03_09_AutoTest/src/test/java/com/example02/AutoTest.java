@@ -1,9 +1,16 @@
 package com.example02;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.Set;
 
 /**
@@ -18,17 +25,16 @@ public class AutoTest {
     private FirefoxDriver driver = new FirefoxDriver();
 
     public void startDriver() throws InterruptedException {
-//        driver.get("https://www.baidu.com");
+        driver.get("https://www.baidu.com");
 //        driver.get("https://news.baidu.com/");
 //        driver.get("https://tool.lu/");
 //        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/modal.html");
 //        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/alert.html");
 //        driver.get("file:////Users/cbiltps/Downloads/ClassCode/selenium4html/confirm.html");
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/Prompt.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/level_locate.html#");
-//        driver.get("file:///D:/selenium4html/selenium4html/select.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/upload.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/Prompt.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/level_locate.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/select.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/upload.html");
 
 //        Thread.sleep(2000);
     }
@@ -175,25 +181,58 @@ public class AutoTest {
         Thread.sleep(3000);
     }
 
+    /**
+     * 鼠标和键盘的操作
+     * @throws InterruptedException
+     */
     public void mouseAndKeyboard() throws InterruptedException {
-//        driver.findElement(By.cssSelector("body > div:nth-child(2) > div > div > a")).click();
-//        Thread.sleep(3000);
-//        driver.findElement(By.cssSelector("#dropdown1 > li:nth-child(3) > a")).click();
-//        Thread.sleep(2000);
-//        Thread.sleep(2000);
-//        driver.findElement(By.cssSelector("body > div:nth-child(2) > div > div > a")).click();
-//        // 模拟鼠标移动到我们想要的元素上，并点击
-//        WebElement ele = driver.findElement(By.cssSelector("#dropdown1 > li:nth-child(2) > a"));
-//        Actions actions = new Actions(driver);
-//        actions.clickAndHold(ele).perform();
-//        actions.click(ele).perform();
-//        Thread.sleep(3000);
+        Thread.sleep(2000);
+     /*   driver.findElement(By.cssSelector("body > div:nth-child(2) > div > div > a")).click();
+        // 模拟鼠标移动到我们想要的元素上并点击
+        WebElement element = driver.findElement(By.cssSelector("#dropdown1 > li:nth-child(2) > a"));
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(element).perform();// 点击左键不松手
+//        actions.click(element).perform();// 点击左键
+        Thread.sleep(3000);*/
 
         // 键盘的操作
-//        WebElement ele = driver.findElement(By.cssSelector("#kw"));
-//        ele.sendKeys("selenium");
+        WebElement element = driver.findElement(By.cssSelector("#kw"));
+        element.sendKeys("selenium");
     }
 
+    /**
+     * 下拉菜单的操作
+     * @throws InterruptedException
+     */
+    public void select() throws InterruptedException {
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(By.cssSelector("#ShippingMethod"));
+        Select select = new Select(element);
+        select.selectByIndex(0);// 通过索引来定位选项
+        Thread.sleep(2000);
+        select.selectByValue("10.69");// 通过value属性定位选项
+        Thread.sleep(2000);
+        select.selectByVisibleText("USPS Priority Mail ==> $7.45");// 通过可见文本定位选项
+        Thread.sleep(5000);
+    }
+
+    public void fileUpload() throws InterruptedException {
+        WebElement element = driver.findElement(By.cssSelector("body > div > div > input[type=file]"));
+        element.sendKeys("/Users/cbiltps/Downloads/ClassCode/selenium4html/upload.html");// 上传文件时键盘输入文件路径
+        Thread.sleep(3000);
+    }
+
+    public void screenshot() throws IOException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.findElement(By.cssSelector("#kw")).sendKeys("鞠婧祎");
+        driver.findElement(By.cssSelector("#su")).click();
+        // 屏幕截图
+        File screenFile = driver.getScreenshotAs(OutputType.FILE);
+        // 将截图文件保存至指定路径下
+        File targetFile = new File("./src/test/ScreenFile/b.png");
+        FileUtils.copyFile(screenFile, targetFile);
+        driver.findElement(By.cssSelector(".paragraph_Hq6qX > span:nth-child(1) > span:nth-child(1)"));
+    }
 
     /**
      * 释放驱动对象并关闭浏览器
@@ -203,7 +242,7 @@ public class AutoTest {
         driver.quit();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         AutoTest test = new AutoTest();
         test.startDriver();
 //        test.testPrint();
@@ -211,8 +250,10 @@ public class AutoTest {
 //        test.sizeOfWindow();
 //        test.navigate();
 //        test.alert();
-        test.mouseAndKeyboard();
+//        test.mouseAndKeyboard();
+//        test.select();
+//        test.fileUpload();
+        test.screenshot();
         test.closeDriver();
-
     }
 }
