@@ -1,5 +1,6 @@
 package com.example02;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -18,13 +19,13 @@ public class AutoTest {
 
     public void startDriver() throws InterruptedException {
 //        driver.get("https://www.baidu.com");
-        driver.get("https://news.baidu.com/");
+//        driver.get("https://news.baidu.com/");
 //        driver.get("https://tool.lu/");
-//        driver.get("file:///D:/selenium4html/selenium4html/modal.html");
-//        driver.get("file:///D:/selenium4html/selenium4html/alert.html#");
-//        driver.get("file:///D:/selenium4html/selenium4html/confirm.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/modal.html");
+//        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/alert.html");
+//        driver.get("file:////Users/cbiltps/Downloads/ClassCode/selenium4html/confirm.html");
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        driver.get("file:///D:/selenium4html/selenium4html/Prompt.html");
+        driver.get("file:///Users/cbiltps/Downloads/ClassCode/selenium4html/Prompt.html");
 //        driver.get("file:///D:/selenium4html/selenium4html/level_locate.html#");
 //        driver.get("file:///D:/selenium4html/selenium4html/select.html");
 //        driver.get("file:///D:/selenium4html/selenium4html/upload.html");
@@ -101,7 +102,6 @@ public class AutoTest {
 //        driver.manage().window().setSize(new Dimension(1000, 800));
 //        Thread.sleep(2000);
 
-
         /**
          * selenium不能直接编译js语言, 但是可以通过方法来执行js语言!
          * 下面是通过executeScript()方法来控制执行js进行页面滑动至底/上, 其参数为js语言的字符串!
@@ -111,6 +111,89 @@ public class AutoTest {
         driver.executeScript("window.scroll(0, document.body.scrollTop)");
         Thread.sleep(2000);
     }
+
+    /**
+     * 导航(针对一个页面的前进和后退).
+     * 注意: 点击连接进入一个新的标签页, 是无法前进和后退的!
+     * @throws InterruptedException
+     */
+    public void navigate() throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("#nav > div > div > ul > li:nth-child(1) > a")).click();
+        Thread.sleep(2000);
+        driver.navigate().back();
+        Thread.sleep(2000);
+        driver.navigate().forward();
+        Thread.sleep(2000);
+    }
+
+    public void alert() throws InterruptedException {
+        /**
+         * 普通弹窗的操作思路
+         */
+//        Thread.sleep(1000);
+//        driver.findElement(By.cssSelector("#show_modal")).click();
+//        Thread.sleep(1000);
+//        // 关闭弹窗
+//        driver.findElement(By.cssSelector("#myModal > div.modal-footer > button:nth-child(1)")).click();
+//        Thread.sleep(1000);
+
+        /**
+         * 警告弹窗的处理
+         */
+//        Thread.sleep(1000);
+//        driver.findElement(By.xpath("//*[@id=\"tooltip\"]")).click();
+//        // 切换到警告弹窗上
+//        Alert alert = driver.switchTo().alert();
+//        // 点击确认按钮
+//        Thread.sleep(1000);
+//        alert.accept();
+//        Thread.sleep(1000);
+
+        /**
+         * 确认弹窗
+         */
+ /*       Thread.sleep(1000);
+        driver.findElement(By.xpath("/html/body/input")).click();
+        // 切换到确认弹窗
+        Alert alert =  driver.switchTo().alert();
+        Thread.sleep(1000);
+        // 点击弹窗上的确认按钮/取消按钮
+//        alert.dismiss();
+        alert.accept();
+        Thread.sleep(3000);*/
+
+        /**
+         * 提示输入弹窗
+         */
+        driver.findElement(By.xpath("/html/body/input")).click();
+        Thread.sleep(1000);
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys("祥子天下无敌");
+        Thread.sleep(1000);
+        alert.accept();
+        Thread.sleep(3000);
+    }
+
+    public void mouseAndKeyboard() throws InterruptedException {
+//        driver.findElement(By.cssSelector("body > div:nth-child(2) > div > div > a")).click();
+//        Thread.sleep(3000);
+//        driver.findElement(By.cssSelector("#dropdown1 > li:nth-child(3) > a")).click();
+//        Thread.sleep(2000);
+//        Thread.sleep(2000);
+//        driver.findElement(By.cssSelector("body > div:nth-child(2) > div > div > a")).click();
+//        // 模拟鼠标移动到我们想要的元素上，并点击
+//        WebElement ele = driver.findElement(By.cssSelector("#dropdown1 > li:nth-child(2) > a"));
+//        Actions actions = new Actions(driver);
+//        actions.clickAndHold(ele).perform();
+//        actions.click(ele).perform();
+//        Thread.sleep(3000);
+
+        // 键盘的操作
+//        WebElement ele = driver.findElement(By.cssSelector("#kw"));
+//        ele.sendKeys("selenium");
+    }
+
 
     /**
      * 释放驱动对象并关闭浏览器
@@ -125,7 +208,11 @@ public class AutoTest {
         test.startDriver();
 //        test.testPrint();
 //        test.jumpWindow();
-        test.sizeOfWindow();
+//        test.sizeOfWindow();
+//        test.navigate();
+//        test.alert();
+        test.mouseAndKeyboard();
         test.closeDriver();
+
     }
 }
