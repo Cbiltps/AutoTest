@@ -10,7 +10,7 @@ import java.time.Duration;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: selenium的基础操作
  * User: cbiltps
  * Date: 2023-03-09
  * Time: 18:23

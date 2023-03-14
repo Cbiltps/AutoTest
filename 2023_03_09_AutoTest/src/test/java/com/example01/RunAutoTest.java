@@ -2,7 +2,7 @@ package com.example01;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: selenium的基础操作
+ * Description:
  * User: cbiltps
  * Date: 2023-03-09
  * Time: 18:23

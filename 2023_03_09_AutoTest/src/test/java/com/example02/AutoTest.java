@@ -15,7 +15,7 @@ import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: selenium操作
  * User: cbiltps
  * Date: 2023-03-13
  * Time: 16:33
@@ -240,20 +240,5 @@ public class AutoTest {
      */
     public void closeDriver() {
         driver.quit();
-    }
-
-    public static void main(String[] args) throws InterruptedException, IOException {
-        AutoTest test = new AutoTest();
-        test.startDriver();
-//        test.testPrint();
-//        test.jumpWindow();
-//        test.sizeOfWindow();
-//        test.navigate();
-//        test.alert();
-//        test.mouseAndKeyboard();
-//        test.select();
-//        test.fileUpload();
-        test.screenshot();
-        test.closeDriver();
     }
 }
